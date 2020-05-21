@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/django,python,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=django,python,visualstudiocode
+# Created by https://www.gitignore.io/api/django,python,jupyternotebooks
+# Edit at https://www.gitignore.io/?templates=django,python,jupyternotebooks
 
 ### Django ###
 *.log
@@ -119,6 +119,20 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+### JupyterNotebooks ###
+# gitignore template for Jupyter Notebooks
+# website: http://jupyter.org/
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Remove previous ipynb_checkpoints
+#   git rm -r .ipynb_checkpoints/
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 
@@ -166,18 +180,9 @@ dmypy.json
 
 # Pyre type checker
 
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# End of https://www.gitignore.io/api/django,python,jupyternotebooks
 
-### VisualStudioCode Patch ###
-# Ignore all local history of files
-.history
-
-# End of https://www.gitignore.io/api/django,python,visualstudiocode
-
+*.ipynb
+*.pkl
 myvenv
 jupyter
