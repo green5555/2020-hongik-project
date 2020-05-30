@@ -4,12 +4,6 @@ import time
 from datetime import datetime
 import pickle
 
-import requests
-from bs4 import BeautifulSoup
-import time
-from datetime import datetime
-import pickle
-
 class AlbamonCrawler :
     def __init__(self) :
         self.base_url = 'https://www.albamon.com/'
@@ -31,7 +25,10 @@ class AlbamonCrawler :
         if worktime.startswith('시간협의') : 
             return (None, None)
         else :
-            return (worktime[:5], worktime[6:11])
+            (l, r) = (worktime[:5], worktime[6:11])
+            l = int(l[:l.find(':')])*60 + int(l[l.find(':')+1:])
+            r = int(r[:r.find(':')])*60 + int(r[r.find(':')+1:])
+            return (l,r)
 
     def get_info_from_source(self, alba_site_number, source) :
         '''
@@ -39,13 +36,13 @@ class AlbamonCrawler :
         return : dict
                 {
                 'sex' : str, '남자', '여자', '무관'
-                'age' : tuple(int, int), (낮은 나이, 높은 나이), 없으면 None
+                'age' : tuple(int, int), (낮은 나이, 높은 나이), 없으면(None, None)
                 'address' : str
                 'pay' : int
                 'type_of_pay' : str, '월급', '일급', etc
-                'worktime' : tuple(str, str), ('00:00', '24:00') 포맷, 없으면 None
+                'worktime' : tuple(int, int), (시작 시간의 분, 끝 시간의 분), 없으면(None, None)
                 'alba_site_name' : str
-                alba_site_number : str
+                'alba_site_number' : str
                 }
         '''
         soup = BeautifulSoup(source, 'html.parser')
@@ -80,7 +77,7 @@ class AlbamonCrawler :
             source = requests.get(self.base_url + f'/list/gi/mon_gi_tot_list.asp?page={page}').text
             soup = BeautifulSoup(source, 'html.parser')
         
-            for i in range(3) :
+            for i in range(5) :
             #for i in range(20) :
                 detail_url_list.append(soup.select(f'td.subject > div.subWrap > p.cName > a')[i]['href'])
 
