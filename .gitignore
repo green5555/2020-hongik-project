@@ -185,6 +185,5 @@ ipython_config.py
 *.ipynb
 *.pkl
 myvenv
-jupyter
 archived
 .vscode
