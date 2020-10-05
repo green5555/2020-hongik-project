@@ -182,8 +182,6 @@ ipython_config.py
 
 # End of https://www.gitignore.io/api/django,python,jupyternotebooks
 
-*.ipynb
-*.pkl
 myvenv
 archived
 .vscode
