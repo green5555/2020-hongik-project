@@ -26,7 +26,7 @@ class AlbaheavenCrawler :
             except Exception as e:
                 print(f'Fail to crawl page {page} : {e}')
 
-            for i in range(3, 101, 2):
+            for i in range(3, 11, 2):
                 try :
                     detail_url_list.append(soup.select(
                         f'#NormalInfo > table > tbody > tr:nth-child({i}) > td.title > span > a.applBtn.blankView')[0]['href'])
@@ -84,6 +84,7 @@ class AlbaheavenCrawler :
         soup = BeautifulSoup(source, 'html.parser')
         
         info = {}
+        info['title'] = soup.select('#DetailView > div.detail-content > div.detail-content__primary > h2')[0].text
         for selector in cond_selector:
             tags = soup.select(selector)[0].find_all('dl')
             for tag in tags :

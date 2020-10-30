@@ -5,6 +5,7 @@ from django.utils import timezone
 class AlbaInfo(models.Model):
 
     '''
+    title : 알바 이름(제목)
     sex : 성별 (남자 or 여자 or 무관)
     age_lower_bound : 최소 나이 (없을시 0)
     age_upper_bound : 최대 나이 (없을시 200)
@@ -15,7 +16,8 @@ class AlbaInfo(models.Model):
     alba_site_name : '알바천국' or ...
     alba_stie_number : 주소 고유 번호
     '''
-    
+
+    title = models.CharField(max_length = 300, null=True)
     sex = models.CharField(max_length = 2, null=True)
     age_lower_bound = models.PositiveSmallIntegerField(null=True)
     age_upper_bound = models.PositiveSmallIntegerField(null=True)

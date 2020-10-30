@@ -9,6 +9,7 @@ def insert_db(info_result):
     for info in info_result :
         try :
             AlbaInfo.objects.create(
+                title = info['title'],
                 sex = info['sex'],
                 age_lower_bound = info['age'][0],
                 age_upper_bound = info['age'][1],
