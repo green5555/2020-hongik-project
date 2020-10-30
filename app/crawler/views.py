@@ -25,16 +25,15 @@ def insert_db(info_result):
             pass
 
 def make_db(request) :
-    for a in AlbaInfo.objects.all():
-        a.delete()
 
+    print('* Start Crawl Albaheaven..')
     albaheaven_crawler =  AlbaheavenCrawler()
     albaheaven_info_result = albaheaven_crawler.get_info_list()
-    insert_db(albaheaven_info_result)
 
-    # albamon_crawler = AlbamonCrawler()
-    # albamon_info_result = albamon_crawler.get_info_list()
-    # insert_db(albamon_info_result)
+    print('* Start make new DB..')
+    for a in AlbaInfo.objects.all():
+        a.delete()
+    insert_db(albaheaven_info_result)
 
     ret = 'Done!\n'
     ret += f'heaven : {len(albaheaven_info_result)}\n'

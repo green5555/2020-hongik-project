@@ -18,7 +18,8 @@ class AlbaheavenCrawler :
         for page in range(1, 1+PAGE_NUM) :
             time.sleep(SLEEP_TIME)
             try :
-                source = requests.get(self.base_url + f'/job/Main.asp?page={page}').text
+                source = requests.get(f'http://www.alba.co.kr/job/main.asp?page={page}&pagesize=50&sidocd=&gugun=&dong=&d_area=&d_areacd=&strAreaMulti=&hidJobKind=&hidJobKindMulti=&WorkTime=&searchterm=&AcceptMethod=&ElecContract=&HireTypeCD=&CareerCD=&CareercdUnRelated=&LastSchoolCD=&LastSchoolcdUnRelated=&GenderCD=&GenderUnRelated=&AgeLimit=0&AgeUnRelated=&PayCD=&PayStart=&WelfareCD=&Special=&WorkWeekCD=&WeekDays=&hidSortCnt=50&hidSortOrder=&hidSortDate=&WorkPeriodCD=&hidSort=FREEORDER&hidSortFilter=Y&hidListView=LIST&WsSrchKeywordWord=&hidWsearchInOut=&hidSchContainText=').text
+                # source = requests.get(self.base_url + f'/job/Main.asp?page={page}').text
                 soup = BeautifulSoup(source, 'html.parser')
                 detail_url_list.append(soup.select(
                         '#NormalInfo > table > tbody > tr.firstLine > td.title > span > a.applBtn.blankView')[0]['href'])
@@ -26,7 +27,7 @@ class AlbaheavenCrawler :
             except Exception as e:
                 print(f'Fail to crawl page {page} : {e}')
 
-            for i in range(3, 11, 2):
+            for i in range(3, 51, 2):
                 try :
                     detail_url_list.append(soup.select(
                         f'#NormalInfo > table > tbody > tr:nth-child({i}) > td.title > span > a.applBtn.blankView')[0]['href'])
@@ -63,7 +64,7 @@ class AlbaheavenCrawler :
         if worktime.startswith('시간협의') : 
             return (None, None)
         else :
-            (l,r) = (worktime[:5], worktime[worktime.find('~')+1:worktime.find('~')+5])
+            (l,r) = (worktime[:5], worktime[worktime.find('~')+1:worktime.find('~')+6])
             l = int(l[:l.find(':')])*60 + int(l[l.find(':')+1:])
             r = int(r[:r.find(':')])*60 + int(r[r.find(':')+1:])
             return (l,r)
