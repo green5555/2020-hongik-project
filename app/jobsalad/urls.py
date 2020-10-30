@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from crawler import views
-
+import crawler.views
+import mainpage.views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('crawling/', views.crawling)
+    path('crawling/', crawler.views.crawling),
+    path('main/', mainpage.views.mainpage)
 ]

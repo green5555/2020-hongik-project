@@ -26,8 +26,7 @@ class AlbaheavenCrawler :
             except Exception as e:
                 print(f'Fail to crawl page {page} : {e}')
 
-            for i in range(3, 7, 2):
-            # for i in range(3, 101, 2):
+            for i in range(3, 101, 2):
                 try :
                     detail_url_list.append(soup.select(
                         f'#NormalInfo > table > tbody > tr:nth-child({i}) > td.title > span > a.applBtn.blankView')[0]['href'])
@@ -54,7 +53,7 @@ class AlbaheavenCrawler :
         l = s_age[0]
         l = int(l[:l.find('세')])
         if s_age[2] == '이전' :
-            r = 150
+            r = 200
         else :
             r = s_age[2]
             r = int(r[:r.find('세')])

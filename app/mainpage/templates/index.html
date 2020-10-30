@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Jobsalad</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      .top{
+        border-bottom: 1px solid black;
+        display: flex; 
+        height: 50px;
+        font-size: 50px;
+        align-items: center;
+        color: blue;
+      }
+      .topbutton{
+        margin-left: auto;   
+        display: flex;           
+      }
+      .topbutton_1{
+        padding: .5rem 1rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: .3rem;
+        color: black; 
+        background-color: #15B1E6;
+        background-image: none;
+              
+      }
+      .topbutton_0{
+        padding: .5rem 0.05rem;
+        font-size: 0.05rem;
+        line-height: 1.5;
+        border-radius: .3rem;
+        color: white; 
+        
+      }
+      .topbutton_2{
+        padding: .5rem 1rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: .3rem;
+        color: black; 
+        background-color: #15B1E6;
+        background-image: none;
+      }            
+      .middle{
+        border-bottom: 1px solid black;
+        height: 200px;
+        font-size: 30px;
+        align-items: center;
+        color: #15E65B;
+        
+      }
+      .midbutton{
+        border-bottom: 1px solid black;
+        display: flex; 
+        
+      }      
+      .midbutton_2{
+        padding: .5rem 1rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: .3rem;  
+        margin-left: auto;  
+      }
+      .midcondition{
+        font-size: 16px;
+        font-family: Consolas, sans-serif;
+        color:black;
+        
+      }
+
+      .bottop{
+        border-bottom: 1px solid black;
+        display: flex;
+        color: #15E6C4;
+      }
+      .botbutton{
+        margin-left: auto;        
+      }      
+
+      .content1, .content2, .content3 {
+        border:1px  solid; padding:10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class= "top">
+      <div class= "title">
+        Job salad
+      </div>
+      <div class = "topbutton">
+        <div class= "topbutton_1">
+          검색
+        </div>
+        <div class= "topbutton_0">
+          공
+        </div>
+        <div class= "topbutton_2">
+          메뉴
+        </div>
+      </div>
+    </div>
+
+    <div class= "middle">
+      <div class= "midbutton">
+        <div class= "midbutton_1">
+          필터링
+        </div>
+       
+      </div>
+      <div class= "midcondition">
+      
+        <form method="get" action="form-action.html">
+        <p>
+        성별
+        <label><input type="checkbox" name="sex" value="man"> 남</label>
+        <label><input type="checkbox" name="sex" value="woman"> 여</label>
+        </p>
+         <p>
+        나이
+        <label><input type="checkbox" name="age" value="10"> 10대</label>
+        <label><input type="checkbox" name="age" value="20"> 20대</label>
+        <label><input type="checkbox" name="age" value="30"> 30대</label>
+        <label><input type="checkbox" name="age" value="40"> 40대</label>
+        </p>
+        <p>
+        주소
+        <label><input type="checkbox" name="locate" value="seoul"> 서울</label>
+        <label><input type="checkbox" name="locate" value="geounggi"> 경기도</label>
+        <label><input type="checkbox" name="locate" value="gangwon"> 강원도</label>
+        </p>
+         
+
+        </form>  
+        
+      </div>
+    </div>
+
+    <div class= "bottom">
+      <div class= "bottop">
+        <div class= "botname">
+          알바 목록 
+        </div>   
+        <div class= "botbutton">
+          정렬
+        </div>
+      </div> 
+      <div class= "botcontents">            
+        
+        {% for alba in albas %}
+            <div>
+                <p>  
+                    <br>
+                    알바사이트 이름 : {{alba.alba_site_name}} &nbsp&nbsp알바 번호 : {{alba.alba_site_number}} 
+                    <br>
+                    알바이름 (디비에 무슨 알바인지 수집하지 않아서 불가) 혹은 링크 들어가서 가져와야할거같습니다
+                    <br>
+                    급여 유형 : {{alba.type_of_pay}} &nbsp&nbsp급여 : {{alba.pay}} 원
+                    <br>
+                    근무시간 : {{alba.worktime_start}} ~ {{alba.worktime_end}}
+                    <br>
+                    성별 :  {{alba.sex}} 
+                    <br>
+                    {% if 0 < alba.age_lower_bound and alba.age_upper_bound < 200%}
+                        연령 제한 : {{alba.age_lower_bound}} ~ {{alba.age_upper_bound}} 
+                    {% else %}
+                        연령 제한 : 없음
+                    {% endif %}
+                    <br>
+                    주소 : {{alba.address}} 
+                    <br>
+                    링크 :  <a href={{"http://www.alba.co.kr/job/Detail.asp?adid="|add:alba.alba_site_number}} target="_blank">사이트 이동</a> 
+                </p>    
+            </div>
+        {% endfor %}
+       		
+      </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+

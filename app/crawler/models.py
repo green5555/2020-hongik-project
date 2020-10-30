@@ -3,16 +3,19 @@ from django.db import models
 from django.utils import timezone
 
 class AlbaInfo(models.Model):
+
     '''
-    {
-    'sex' : str, '남자', '여자', '무관'
-    'age' : tuple(int, int), (낮은 나이, 높은 나이), 없으면 None
-    'address' : str
-    'pay' : int
-    type_of_pay : str, '월급', '일급', etc
-    worktime : tuple(str, str), ('00:00', '24:00') 포맷, 없으면 None
-    }
+    sex : 성별 (남자 or 여자 or 무관)
+    age_lower_bound : 최소 나이 (없을시 0)
+    age_upper_bound : 최대 나이 (없을시 200)
+    address : 주소
+    type_of_pay : 월급 or 일급 or 시급 ...
+    worktime_start : 근무 시작 시간 (정수 : 시 * 60 + 분)
+    worktime_end : 근무 끝나는 시간 (정수 : 시 * 60 + 분)
+    alba_site_name : '알바천국' or ...
+    alba_stie_number : 주소 고유 번호
     '''
+    
     sex = models.CharField(max_length = 2, null=True)
     age_lower_bound = models.PositiveSmallIntegerField(null=True)
     age_upper_bound = models.PositiveSmallIntegerField(null=True)

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_extensions',
 
     'crawler',
+    'mainpage',
 ]
 
 MIDDLEWARE = [
